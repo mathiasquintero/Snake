@@ -19,8 +19,8 @@ public class Coordinate {
 	}
 	
 	public static Coordinate getRandomCoordinate() {
-		int x = (int) (Math.random() * 10) + 4;
-		int y = (int) (Math.random() * 10) + 4;
+		int x = (int) (Math.random() * 97);
+		int y = (int) (Math.random() * 30);
 		return new Coordinate(y,x);
 	}
 	

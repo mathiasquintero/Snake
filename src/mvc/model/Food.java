@@ -2,7 +2,6 @@ package mvc.model;
 
 import java.util.LinkedList;
 import java.util.List;
-import javafx.util.Pair;
 
 public class Food extends GameObjekt {
 	
@@ -29,9 +28,9 @@ public class Food extends GameObjekt {
 	}
 
 	@Override
-	public List<Pair<Character, Coordinate>> getChanges() {
-		List<Pair<Character, Coordinate>> list = new LinkedList<Pair<Character, Coordinate>>();
-		list.add(new Pair<Character, Coordinate>(this.getDisplayChar(), coordinate));
+	public List<Change> getChanges() {
+		List<Change> list = new LinkedList<Change>();
+		list.add(new Change(this.getDisplayChar(), coordinate));
 		return list;
 	}
 

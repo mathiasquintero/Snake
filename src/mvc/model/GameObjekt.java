@@ -2,7 +2,8 @@ package mvc.model;
 
 import java.util.LinkedList;
 import java.util.List;
-import javafx.util.Pair;
+
+import mvc.controller.GameObjektObserver;
 
 public abstract class GameObjekt {
 	
@@ -15,7 +16,11 @@ public abstract class GameObjekt {
 		this.displayChar = displayChar;
 	}
 	
-	public abstract List<Pair<Character,Coordinate>> getChanges();
+	/**
+	 * Give a list of Changes in form of a tuple of Coordinates
+	 * @return
+	 */
+	public abstract List<Change> getChanges();
 	
 	/**
 	 * Notify all observers to update.

@@ -2,6 +2,8 @@ package mvc.model;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import mvc.controller.GameObjektObserver;
 import javafx.util.Pair;
 
 /**
@@ -24,11 +26,11 @@ public class Field extends GameObjekt implements GameObjektObserver {
 	
 	private Food food;
 	
-	private List<Pair<Character, Coordinate>> changes;
+	private List<Change> changes;
 	
 	public Field(int width, int height) {
 		super(' ');
-		changes = new LinkedList<Pair<Character, Coordinate>>();
+		changes = new LinkedList<Change>();
 		snake = new Snake(this,5);
 		snake.addOberserver(this);
 		food = new Food();
@@ -87,8 +89,8 @@ public class Field extends GameObjekt implements GameObjektObserver {
 	}
 	
 	@Override
-	public List<Pair<Character, Coordinate>> getChanges() {
-		List<Pair<Character, Coordinate>> returnable = new LinkedList<Pair<Character,Coordinate>>();
+	public List<Change> getChanges() {
+		List<Change> returnable = new LinkedList<Change>();
 		returnable.addAll(changes);
 		changes.clear();
 		return returnable;

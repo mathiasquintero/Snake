@@ -2,7 +2,6 @@ package mvc.model;
 
 import java.util.LinkedList;
 import java.util.List;
-import javafx.util.Pair;
 
 public class Snake extends GameObjekt implements Runnable {
 	
@@ -12,7 +11,7 @@ public class Snake extends GameObjekt implements Runnable {
 	
 	//Changes since the last update
 	
-	private List<Pair<Character,Coordinate>> changes;
+	private List<Change> changes;
 	
 	private Direction direction;
 	
@@ -23,7 +22,7 @@ public class Snake extends GameObjekt implements Runnable {
 	public Snake(Field field, int size) {
 		super('\u2588');
 		path = new LinkedList<Coordinate>();
-		changes = new LinkedList<Pair<Character,Coordinate>>();
+		changes = new LinkedList<Change>();
 		direction = Direction.Right;
 		this.field = field;
 		
@@ -33,7 +32,7 @@ public class Snake extends GameObjekt implements Runnable {
 		for (int i = 0; i<size; i++) {
 			Coordinate c = new Coordinate(start.getY() + i, start.getX());
 			path.add(c);
-			changes.add(new Pair<Character, Coordinate>(this.getDisplayChar(), c));
+			changes.add(new Change(this.getDisplayChar(), c));
 		}
 	}
 	
@@ -46,8 +45,8 @@ public class Snake extends GameObjekt implements Runnable {
 		if (path.contains(next) || field.coordinateIsOut(next)) {
 			alive = false;
 		}
-		changes.add(new Pair<Character, Coordinate>(this.getDisplayChar(), next));
-		changes.add(new Pair<Character, Coordinate>(' ', path.get(0)));
+		changes.add(new Change(this.getDisplayChar(), next));
+		changes.add(new Change(' ', path.get(0)));
 		path.add(next);
 		if (!field.didEat(path)) {
 			path.remove(0);
@@ -69,8 +68,8 @@ public class Snake extends GameObjekt implements Runnable {
 	}
 
 	@Override
-	public List<Pair<Character, Coordinate>> getChanges() {
-		List<Pair<Character, Coordinate>> returnable = new LinkedList<Pair<Character,Coordinate>>();
+	public List<Change> getChanges() {
+		List<Change> returnable = new LinkedList<Change>();
 		returnable.addAll(changes);
 		changes.clear();
 		return returnable;

@@ -2,12 +2,10 @@ package mvc.controller;
 
 import java.util.List;
 
-import javafx.util.Pair;
-import mvc.model.Coordinate;
+import mvc.model.Change;
 import mvc.model.Direction;
 import mvc.model.Field;
 import mvc.model.GameObjekt;
-import mvc.model.GameObjektObserver;
 
 import com.googlecode.lanterna.TerminalFacade;
 import com.googlecode.lanterna.input.Key;
@@ -46,11 +44,10 @@ public class ViewController implements GameObjektObserver, Runnable {
 
 	@Override
 	public void update(GameObjekt o) {
-		List<Pair<Character,Coordinate>> changes = o.getChanges();
-		for (Pair<Character,Coordinate> change : changes) {
-			char display = change.getKey();
-			Coordinate coordinate = change.getValue();
-			view.moveCursor(coordinate.getX(), coordinate.getY());
+		List<Change> changes = o.getChanges();
+		for (Change change : changes) {
+			char display = change.getDisplay();
+			view.moveCursor(change.getX(), change.getY());
 			view.putCharacter(display);
 		}
 	}
